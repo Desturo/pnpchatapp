@@ -27,11 +27,12 @@
         <input
           id="msg"
           type="number"
+          onkeypress="return onlyNumberKey(event)"
           placeholder="Höhe des Würfels"
           required
           autocomplete="off"
         />
-        <button class="btn"><i class="fas fa-paper-plane"></i> Senden</button>
+        <button class="btn"><i class="fas fa-dice"></i> Würfeln</button>
       </form>
     </div>
   </div>
