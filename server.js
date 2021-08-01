@@ -9,7 +9,7 @@ const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/u
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
-const botName = 'ChatCordBot';
+const botName = 'Gamemasters Helferlein';
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -19,9 +19,9 @@ io.on('connection', socket => {
 
         socket.join(user.room);
 
-        socket.emit('message', formatMessage(botName, 'Welcome to Chatcord!'));
+        socket.emit('message', formatMessage(botName, 'Wilkommen im Würfelchat!'));
 
-        socket.broadcast.to(user.room   ).emit('message', formatMessage(botName, `${user.username} has joined the Chat!`));
+        socket.broadcast.to(user.room   ).emit('message', formatMessage(botName, `${user.username} ist dem Chat beigetreten!`));
 
         io.to(user.room).emit('roomUsers', {
             room: user.room,
@@ -42,7 +42,7 @@ io.on('connection', socket => {
         const user = userLeave(socket.id);
 
         if(user) {
-            io.to(user.room).emit('message', formatMessage(botName, `${user.username} has left the chat!`));
+            io.to(user.room).emit('message', formatMessage(botName, `${user.username} hat den Chat verlassen!`));
 
             io.to(user.room).emit('roomUsers', {
                 room: user.room,
